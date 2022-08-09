@@ -25,10 +25,10 @@ namespace final2.Repositories
                 SELECT
                 a.*,
                  k.*,
-                  vk.id as vkId
+                  vk.id as vaultKeepId
                 FROM vaultkeeps vk
                 JOIN keeps k ON k.id = vk.keepId
-                join accounts a on a.id = k.accountId
+                join accounts a on a.id = k.creatorId
                 WHERE vk.vaultId = @vaultId";
             return _db.Query<Profile, VaultKeepViewModel, VaultKeepViewModel>(sql, (p, vk) =>
             {
@@ -38,7 +38,7 @@ namespace final2.Repositories
 
         }
 
-        internal VaultKeep Create(VaultKeep vk)
+        internal VaultKeep Create(VaultKeep vaultKeep)
         {
             string sql = @"
             INSERT INTO vaultkeeps
@@ -46,9 +46,8 @@ namespace final2.Repositories
             VALUES
             (@VaultId, @KeepId, @CreatorId);
             SELECT LAST_INSERT_ID();";
-            int id = _db.ExecuteScalar<int>(sql, vk);
-            vk.Id = id;
-            return vk;
+            vaultKeep.Id = _db.ExecuteScalar<int>(sql, vaultKeep);
+            return vaultKeep;
         }
 
 

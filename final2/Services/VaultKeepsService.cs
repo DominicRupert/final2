@@ -25,9 +25,14 @@ namespace final2.Services
         }
 
 
-        internal List<VaultKeepViewModel> GetKeeps(int id1, string id2)
+        internal List<VaultKeepViewModel> GetKeeps(int vaultId, string userId)
         {
-            throw new NotImplementedException();
+            Vault vault = _vRepo.Get(vaultId);
+            if (vault.IsPrivate && vault.CreatorId != userId)
+            {
+                throw new Exception("You are not authorized to view this vault");
+            }
+            return _repo.GetKeeps(vaultId);
         }
 
         internal VaultKeep Create(VaultKeep vk)
@@ -38,8 +43,8 @@ namespace final2.Services
                 throw new Exception("You do not have access to this vaultkeerp.");
             }
             List<VaultKeepViewModel> vaultKeeps = _repo.GetKeeps(vk.VaultId);
-            vaultKeeps = vaultKeeps.FindAll(v => v.Id == vk.KeepId);
-            if (vaultKeeps?.Count > 0)
+            vaultKeeps = vaultKeeps?.FindAll(v => v.Id == vk.KeepId);
+            if (vaultKeeps?.Count >= 1)
             {
                 throw new Exception("You already have this keep in this vault.");
             }

@@ -66,7 +66,7 @@ namespace final2.Controllers
         }
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<ActionResult<Keep>> Edit(int id, [FromBody] Keep keepData)
+        public async Task<ActionResult<Keep>> Edit([FromBody] Keep keepData, int id)
         {
             try
             {

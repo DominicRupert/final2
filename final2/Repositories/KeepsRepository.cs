@@ -46,10 +46,10 @@ namespace final2.Repositories
             {
                 keep.Creator = profile;
                 return keep;
-            } , new { id }).FirstOrDefault();
+            }, new { id }).FirstOrDefault();
         }
 
-      
+
 
         internal void AddToKeepCount(int keepId)
         {
@@ -81,7 +81,7 @@ namespace final2.Repositories
             {
                 keep.Creator = profile;
                 return keep;
-            } , new { id }).ToList();
+            }, new { id }).ToList();
         }
         internal void AddToViewCount(int id)
         {
@@ -100,20 +100,20 @@ namespace final2.Repositories
             (@Name, @Description, @Img, @Kept, @Views, @CreatorId);
             SELECT LAST_INSERT_ID();";
             keepData.Id = _db.ExecuteScalar<int>(sql, keepData);
-       
+
             return keepData;
         }
 
-        internal void Edit(Keep keepData)
+        internal void Edit(Keep found)
         {
             string sql = @"
             UPDATE keeps
-            SET name = @Name,
+            SET 
+            name = @Name,
                 description = @Description,
-                img = @Img,
-                kept = @Kept,
+                img = @Img
             WHERE id = @Id";
-            _db.Execute(sql, keepData);
+            _db.Execute(sql, found);
         }
         internal void Delete(int id)
         {
@@ -123,6 +123,6 @@ namespace final2.Repositories
             _db.Execute(sql, new { id });
         }
 
-        
+
     }
 }

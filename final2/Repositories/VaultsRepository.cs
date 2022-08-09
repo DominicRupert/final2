@@ -69,13 +69,12 @@ namespace final2.Repositories
         {
             string sql = @"
             Insert into vaults
-            (name, description, isPrivate creatorId)
+            (name, description, isPrivate, creatorId)
             Values
-            (@Name, @Description, @IsPrivate @CreatorId);
+            (@Name, @Description, @IsPrivate, @CreatorId);
             Select LAST_INSERT_ID()
             ";
-            int id = _db.ExecuteScalar<int>(sql, vaultData);
-            vaultData.Id = id;
+            vaultData.Id = _db.ExecuteScalar<int>(sql, vaultData);
             return vaultData;
         }
 
@@ -84,7 +83,7 @@ namespace final2.Repositories
             string sql = @"
             Update vaults
             Set name = @Name,
-            description = @Description,
+            description = @Description
             Where id = @Id
             ";
             _db.Execute(sql, found);

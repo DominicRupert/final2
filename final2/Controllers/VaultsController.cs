@@ -45,10 +45,7 @@ namespace final2.Controllers
             {
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
                 Vault vault = _vs.Get(id, userInfo?.Id);
-                if (vault.CreatorId != userInfo.Id)
-                {
-                    return Forbid();
-                }
+              
                 return Ok(vault);
             }
             catch (Exception e)

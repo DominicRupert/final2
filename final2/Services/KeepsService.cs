@@ -31,10 +31,11 @@ namespace final2.Services
         {
             Keep found = _repo.Get(id);
             found.Views += 1;
-            if (found != null)
+            if (found == null)
             {
-                _repo.Edit(found);
+                throw new Exception("Invalid Id");
             }
+         
             AddView(id);
             return found;
         }
@@ -52,21 +53,21 @@ namespace final2.Services
 
         internal void Delete(int id, string userId)
         {
-            Keep found = Get(id);
-            OwnerCheck(found.CreatorId, userId);
+            Keep original = Get(id);
+            OwnerCheck(original.CreatorId, userId);
             _repo.Delete(id);
         }
 
 
         internal Keep Edit(Keep keepData)
         {
-            Keep found = Get(keepData.Id);
-            OwnerCheck(found.CreatorId, keepData.CreatorId);
-            found.Img = keepData.Img ?? found.Img;
-            found.Name = keepData.Name ?? found.Name;
-            found.Description = keepData.Description ?? found.Description;
-            _repo.Edit(found);
-            return found;
+            Keep original = Get(keepData.Id);
+            OwnerCheck(keepData.CreatorId, original.CreatorId);
+            original.Img = keepData.Img ?? original.Img;
+            original.Name = keepData.Name ?? original.Name;
+            original.Description = keepData.Description ?? original.Description;
+            _repo.Edit(original);
+            return original;
            
         }
 
