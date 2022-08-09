@@ -42,6 +42,14 @@ namespace final2
             
             services.AddScoped<AccountsRepository>();
             services.AddScoped<AccountService>();
+            services.AddTransient<KeepsRepository>();
+			services.AddTransient<KeepsService>();
+
+			services.AddTransient<VaultsRepository>();
+			services.AddTransient<VaultsService>();
+
+			services.AddTransient<VaultKeepsRepository>();
+			services.AddTransient<VaultKeepsService>();
         }
 
         private void ConfigureCors(IServiceCollection services)

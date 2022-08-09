@@ -43,7 +43,7 @@ namespace final2.Controllers
         public ActionResult<List<Keep>> GetKeeps(string id)
         {
             try{
-            List<Keep> keeps = _ks.GetKeepsByProfileId(id);
+            List<Keep> keeps = _ks.GetByUserId(id);
             return Ok(keeps);
             }
             catch(Exception e){

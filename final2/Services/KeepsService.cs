@@ -23,6 +23,10 @@ namespace final2.Services
         {
             return _repo.Get();
         }
+        internal List<Keep> GetByUserId(string id)
+        {
+            return _repo.GetByUserId(id);
+        }
         internal Keep Get(int id)
         {
             Keep found = _repo.Get(id);
@@ -34,10 +38,7 @@ namespace final2.Services
             AddView(id);
             return found;
         }
-        internal List<Keep> GetKeepsByProfileId(string id)
-        {
-            return _repo.GetKeepsByProfileId(id);
-        }
+      
 
         internal void AddView(int id)
         {
