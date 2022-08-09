@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace keepr.Interfaces
+namespace final2.Interfaces
 {
 	public interface IRepository<TItem, TId>
 	{

@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using keepr.Interfaces;
-
-namespace keepr.Models
+namespace final2.Models
 {
-	public class VaultKeep
+    public class VaultKeep
 	{
 		public int Id { get; set; }
 		public string CreatorId { get; set; }

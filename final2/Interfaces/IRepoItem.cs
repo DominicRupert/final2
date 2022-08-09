@@ -1,6 +1,6 @@
-using keepr.Models;
+using final2.Models;
 
-namespace keepr.Interfaces
+namespace final2.Interfaces
 {
 	public interface IRepoItem<T>
 	{

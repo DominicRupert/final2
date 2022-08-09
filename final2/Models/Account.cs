@@ -1,4 +1,4 @@
-namespace keepr.Models
+namespace final2.Models
 {
 	public class Account : Profile
 	{
