@@ -55,7 +55,7 @@ namespace final2.Controllers
             {
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
                 keepData.CreatorId = userInfo.Id;
-                Keep newKeep = await _ks.Create(keepData);
+                Keep newKeep = _ks.Create(keepData);
                 newKeep.Creator = userInfo;
                 return Ok(newKeep);
             }
@@ -66,6 +66,44 @@ namespace final2.Controllers
         }
         [HttpPut("{id}")]
         [Authorize]
+        public async Task<ActionResult<Keep>> Edit(int id, [FromBody] Keep keepData)
+        {
+            try
+            {
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                keepData.CreatorId = userInfo.Id;
+                keepData.Id = id;
+                Keep updatedKeep = await _ks.Edit(keepData);
+                return Ok(updatedKeep);
+
+       
+            } catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<ActionResult<String>> Delete(int id)
+        {
+            try
+            {
+                Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+                Keep keep = _ks.Get(id);
+                if (keep.CreatorId != userInfo.Id)
+                {
+                    return Forbid();
+                }
+                await _ks.Delete(id);
+                return Ok("Keep Deleted");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+
+
+        }
         
 
     }
