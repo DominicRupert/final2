@@ -49,7 +49,10 @@ namespace final2.Repositories
             } , new { id }).FirstOrDefault();
         }
 
-    
+        internal List<Keep> GetKeepsByProfileId(string id)
+        {
+            throw new NotImplementedException();
+        }
 
         internal void AddToKeepCount(int keepId)
         {

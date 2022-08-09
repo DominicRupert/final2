@@ -1,5 +1,7 @@
 using final2.Models;
 using final2.Repositories;
+using System;
+using System.Collections.Generic;
 
 namespace final2.Services
 {
@@ -27,6 +29,15 @@ namespace final2.Services
                 return _repo.Create(userInfo);
             }
             return profile;
+        }
+        internal Profile GetProfileById(string id)
+        {
+            Profile found = _repo.GetById(id);
+            if (found == null)
+            {
+                throw new Exception("Invalid Profile Id");
+            }
+            return found;
         }
 
         internal Account Edit(Account editData, string userEmail)
