@@ -45,14 +45,32 @@ namespace final2.Services
             return _repo.Create(keepData);
         }
 
-        internal Task Delete(int id)
+        internal void Delete(int id, string userId)
         {
-            throw new NotImplementedException();
+            Keep found = Get(id);
+            OwnerCheck(found.CreatorId, userId);
+            _repo.Delete(id);
         }
 
-        internal Task<Keep> Edit(Keep keepData)
+
+        internal Keep Edit(Keep keepData)
         {
-            throw new NotImplementedException();
+            Keep found = Get(keepData.Id);
+            OwnerCheck(found.CreatorId, keepData.CreatorId);
+            found.Img = keepData.Img ?? found.Img;
+            found.Name = keepData.Name ?? found.Name;
+            found.Description = keepData.Description ?? found.Description;
+            _repo.Edit(found);
+            return found;
+           
+        }
+
+        internal static void OwnerCheck(string creatorId, string userId)
+        {
+            if (creatorId != userId)
+            {
+                throw new Exception("You are not the owner of this keep");
+            }
         }
     }
 }

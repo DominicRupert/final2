@@ -73,7 +73,7 @@ namespace final2.Controllers
                 Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
                 keepData.CreatorId = userInfo.Id;
                 keepData.Id = id;
-                Keep updatedKeep = await _ks.Edit(keepData);
+                Keep updatedKeep = _ks.Edit(keepData);
                 return Ok(updatedKeep);
 
        
@@ -94,7 +94,7 @@ namespace final2.Controllers
                 {
                     return Forbid();
                 }
-                await _ks.Delete(id);
+                _ks.Delete(id, userInfo.Id);
                 return Ok("Keep Deleted");
             }
             catch (Exception e)
