@@ -1,6 +1,6 @@
 import { AppState } from "../AppState.js";
 import { api } from "./AxiosService.js";
-import {logger} from ".../utils/Logger.js";
+import {logger} from "../utils/Logger.js";
 
 class KeepsService
 {

@@ -1,15 +1,13 @@
 <template>
-<!-- //TODO add function -->
-<div class="card">
-<img :src="keep.img" class="card-img" alt="">
-<div class="card-img-overlay">
-<h1>{{keep.name}}</h1>
-</div>
-
-</div>
-
+  <div class="card my-2 selectable elevation-5 w-100" @click="openLgModal">
+    <img :src="keep.img" alt="" class="card-img" />
+    <div class="card-img-overlay text-light text-shadow d-flex align-items-end">
+      <h1 class="fw-light">
+        {{ keep.name }}
+      </h1>
+    </div>
+  </div>
 </template>
-
 
 <script>
 import { Modal } from 'bootstrap';
