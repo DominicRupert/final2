@@ -33,7 +33,7 @@ export default {
     const route = useRoute()
     onMounted(async () => {
       try {
-        await vaultsService.getById(route.params.id)
+        await vaultsService.getVault(route.params.id)
       }
       catch (error) {
         console.error("[THIS_VAULT_IS_PRIVATE]", error.message);

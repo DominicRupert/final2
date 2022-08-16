@@ -59,7 +59,7 @@ export default {
     const route = useRoute()
     onMounted(async () => {
       try {
-        await profilesService.getProfileById(route.params.id)
+        await profilesService.getProfile(route.params.id)
       }
       catch (error) {
         console.error("[COULD_NOT_LOAD_USER]", error.message);

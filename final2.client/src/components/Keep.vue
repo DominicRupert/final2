@@ -21,11 +21,14 @@ export default {
         }
     
     },
-    setup(props){
-        return {
-            
-        }
+     setup(props) {
+    return {
+      async openLgModal() {
+        await keepsService.getKeep(props.keep.id)
+        Modal.getOrCreateInstance(document.getElementById('modalLg')).toggle()
+      }
     }
+  }
 }
 </script>
 

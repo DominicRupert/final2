@@ -51,8 +51,11 @@
 import { computed } from "@vue/reactivity";
 import { AppState } from "../AppState";
 import { AuthService } from "../services/AuthService";
+import { useRoute, useRouter } from 'vue-router';
 export default {
   setup() {
+    const router = useRouter()
+    const route = useRoute()
     return {
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
@@ -62,6 +65,10 @@ export default {
       async logout() {
         AuthService.logout({ returnTo: window.location.origin });
       },
+      goToProfilePage() {
+        if (route.params.id !== this.account.id)
+          router.push({ name: 'Profile', params: { id: this.account.id } })
+      }
     };
   },
 };
